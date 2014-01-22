@@ -5,38 +5,53 @@ var apiKey = '2620eebbca447b21a05739e663e5d788';
 
 var baseURL = 'http://api.dp.la/v2/items?q=';
 
-$("#search input[type=submit]").on('click', function() { 
+$.getJSON('http://api.dp.la/v2/items?q=chunk&api_key=2620eebbca447b21a05739e663e5d788', function(d) {
 
-	var input = $('#search input[type=text]')[0].value;
+	console.log('what');
+});
+
+
+$('#search').submit(function(e) {
+
+	e.preventDefault();
+
+	var input = $('#search input[type=text]').val();
+	console.log(input);
 
 	dpla.search(input);
 
 });
 
-
 var dpla = {
 
 	search: function(str){
 
-		var url = baseURL;
-		url	+= str;
-		url	+= '&api_key=' + apiKey;
+		var dpla = baseURL
+			+ str
+			+ '&api_key=' + apiKey;
 
-		$.ajax({
+		console.log(dpla);
 
-	        type: 'GET',
-	        url: url,
-	        async: false,
-	        // jsonpCallback: 'JSON_CALLBACK',
-	        // contentType: "application/json",
-	        dataType: 'json',
-	        success: function() {
-	        	console.log('fire');
-	        },
-	        error: function(e) {
-	            console.log(e.message);
-	        }
-	    });
+		$.getJSON(dpla, function(data) {
+
+			console.log('fire');
+
+		});
+
+		// $.ajax({
+
+	 //        type: 'GET',
+	 //        url: url,
+	 //        // jsonpCallback: 'JSON_CALLBACK',
+	 //        contentType: "application/json",
+	 //        dataType: 'json',
+	 //        success: function(data) {
+	 //        	console.log('fire');
+	 //        },
+	 //        error: function(e) {
+	 //            console.log(e.message);
+	 //        }
+	 //    });
 
 	}
 
