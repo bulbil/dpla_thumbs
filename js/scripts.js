@@ -60,7 +60,7 @@ var dpla = {
 						thumb.append('<a><img>');
 						thumb.children('a').attr( {'href': d.isShownAt, 'target': 'blank'});		
 						thumb.find('a img').attr('src', d.object);
-						thumb.tooltip({'title': d.sourceResource.title, 'placement': 'bottom'});
+						thumb.tooltip({'title': d.sourceResource.title, 'placement': 'auto bottom'});
 					}
 		        });
 	        },

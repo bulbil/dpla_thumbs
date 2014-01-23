@@ -18,19 +18,24 @@
   <body>
 
 	<div class='navbar navbar-inverse navbar-fixed-top'>
-	<div class='col-md-8 col-md-offset-2'>
   
-    <h1 class='navbar-header'>DPLA THUMBS</h1>
+    <div class='row'>  
 
-		<form id='search'>
-			<input type="text">
-			<input type="submit" value='get thumbs!'>
-		</form>
+    <div class='col-md-4 col-md-offset-2' >  
+      <h1>DPLA THUMBS</h1>
+    </div>    
+    
+    <div class='col-md-4' id='search'>
+    		<form class='form-inline' role='form'>
+    			<input class='form-control' type="text" placeholder='search'>
+    			<button class='btn btn-default' type="submit">get thumbs!</button>
+    		</form>
+    </div>
+    </div>
   
 	</div>
-	</div>
 
-	<div class='row'>
+	<div class='row' id='results'>
     
     <div class='col-md-8 col-md-offset-2' id='thumbs'>
       <ul class='list-inline'></ul>

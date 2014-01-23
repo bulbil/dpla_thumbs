@@ -1,9 +1,13 @@
 body {
-	font-family: helvetica;
-}
+/*	font-family: helvetica;
+*/}
 
+.navbar h1 { color: #fff; }
 
+.navbar #search { padding-top: 1.5%;}
 
-#thumbs ul li img{
-	min-width: 200px;
-}
+.navbar #search form input{ width: 50%;}
+
+#results {padding-top: 10%;}
+
+#thumbs ul li img{ min-width: 200px; }
