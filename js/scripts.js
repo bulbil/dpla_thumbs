@@ -24,7 +24,7 @@ var dpla = {
 		data = { 	
 			'q': str, 
     		'api_key': apiKey,
-    		'page_size': 1,
+    		'page_size': 10,
     		'page': page
 	        	};
 
@@ -35,14 +35,6 @@ var dpla = {
 		var url = baseURL
 			+ str;
 
-		var tooltipAttr = {
-
-			'class': 'tooltip',
-			'data-toggle': 'tooltip',
-			'title': '',
-
-		}
-
 		$.ajax({
 
 	        type: 'GET',
@@ -51,10 +43,13 @@ var dpla = {
 	        dataType: 'jsonp',
 	        success: function(data) {
 
+				var count = (data.count > 0) ? data.count + ' results' : 'no results';
+				$('#count h1').text(count);
+
 	        	$.each(data.docs, function(i,d) {
 
 	        		if(d.object) {
-	        			
+
 						$('#thumbs ul').append('<li>');
 						var thumb = $('#thumbs li').last();
 						thumb.append('<a><img>');

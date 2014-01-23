@@ -2,12 +2,13 @@ body {
 /*	font-family: helvetica;
 */}
 
-.navbar h1 { color: #fff; }
+.navbar h1, .navbar #count { color: #fff; }
 
 .navbar #search { padding-top: 1.5%;}
 
 .navbar #search form input{ width: 50%;}
 
 #results {padding-top: 10%;}
+#results h3{ color: #bbb;}
 
 #thumbs ul li img{ min-width: 200px; }
