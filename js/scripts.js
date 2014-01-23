@@ -11,26 +11,25 @@ $('#search').submit(function(e) {
 
 	e.preventDefault();
 
+    page = ($('#thumbs ul li').length == 0) ? 1 : page + 1; 
+    $('#thumbs ul li').remove();
+
 	var input = $('#search input[type=text]').val();
 
-	dpla.search(input);
+	dpla.search(input, page);
 
 });
 
 var dpla = {
 
-	search: function(str){
+	search: function(str, int){
 		
 		data = { 	
 			'q': str, 
     		'api_key': apiKey,
     		'page_size': 10,
-    		'page': page
+    		'page': int
 	        	};
-
-		page = ($('#thumbs ul li').length == 0) ? 2 : page + 1;
-
-		console.log(page);
 
 		var url = baseURL
 			+ str;
@@ -46,10 +45,12 @@ var dpla = {
 				var count = (data.count > 0) ? data.count + ' results' : 'no results';
 				$('#count h1').text(count);
 
+
 	        	$.each(data.docs, function(i,d) {
+	
+					$('#results h3').css('display', function() { return ($('#thumbs ul li').length == 0) ? 'visible' : 'none'; });
 
 	        		if(d.object) {
-
 						$('#thumbs ul').append('<li>');
 						var thumb = $('#thumbs li').last();
 						thumb.append('<a><img>');
@@ -63,6 +64,5 @@ var dpla = {
 	            console.log(e.message);
 	        }
 	    });
-
 	}
 }

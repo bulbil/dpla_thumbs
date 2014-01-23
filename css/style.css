@@ -1,8 +1,7 @@
-body {
-/*	font-family: helvetica;
-*/}
 
-.navbar h1, .navbar #count { color: #fff; }
+.navbar {background-color: rgb(230, 164, 37); border-bottom: 5px solid rgb(221, 78, 0);}
+
+.navbar h1, .navbar #count { color: rgb(179, 212, 252); }
 
 .navbar #search { padding-top: 1.5%;}
 
