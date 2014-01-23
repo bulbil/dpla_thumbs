@@ -1,22 +1,17 @@
 // test dpla thing
 // should take a simple search and return thumbs
 
-var apiKey = '2620eebbca447b21a05739e663e5d788';
+var apiKey = '2620eebbca447b21a05739e663e5d788',
+baseURL = 'http://api.dp.la/v2/items?q=',
+page = 1;
 
-var baseURL = 'http://api.dp.la/v2/items?q=';
-
-$.getJSON('http://api.dp.la/v2/items?q=chunk&api_key=2620eebbca447b21a05739e663e5d788', function(d) {
-
-	console.log('what');
-});
-
+$('.tooltip').tooltip();
 
 $('#search').submit(function(e) {
 
 	e.preventDefault();
 
 	var input = $('#search input[type=text]').val();
-	console.log(input);
 
 	dpla.search(input);
 
@@ -25,35 +20,54 @@ $('#search').submit(function(e) {
 var dpla = {
 
 	search: function(str){
+		
+		data = { 	
+			'q': str, 
+    		'api_key': apiKey,
+    		'page_size': 1,
+    		'page': page
+	        	};
 
-		var dpla = baseURL
-			+ str
-			+ '&api_key=' + apiKey;
+		page = ($('#thumbs ul li').length == 0) ? 2 : page + 1;
 
-		console.log(dpla);
+		console.log(page);
 
-		$.getJSON(dpla, function(data) {
+		var url = baseURL
+			+ str;
 
-			console.log('fire');
+		var tooltipAttr = {
 
-		});
+			'class': 'tooltip',
+			'data-toggle': 'tooltip',
+			'title': '',
 
-		// $.ajax({
+		}
 
-	 //        type: 'GET',
-	 //        url: url,
-	 //        // jsonpCallback: 'JSON_CALLBACK',
-	 //        contentType: "application/json",
-	 //        dataType: 'json',
-	 //        success: function(data) {
-	 //        	console.log('fire');
-	 //        },
-	 //        error: function(e) {
-	 //            console.log(e.message);
-	 //        }
-	 //    });
+		$.ajax({
+
+	        type: 'GET',
+	        url: url,
+	        data: data,
+	        dataType: 'jsonp',
+	        success: function(data) {
+
+	        	$.each(data.docs, function(i,d) {
+
+	        		if(d.object) {
+	        			
+						$('#thumbs ul').append('<li>');
+						var thumb = $('#thumbs li').last();
+						thumb.append('<a><img>');
+						thumb.children('a').attr( {'href': d.isShownAt, 'target': 'blank'});		
+						thumb.find('a img').attr('src', d.object);
+						thumb.tooltip({'title': d.sourceResource.title, 'placement': 'bottom'});
+					}
+		        });
+	        },
+	        error: function(e) {
+	            console.log(e.message);
+	        }
+	    });
 
 	}
-
-
 }

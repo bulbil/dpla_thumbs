@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -16,18 +17,24 @@
   </head>
   <body>
 
-	<div class='row'>
-	<div class='col-md-8 col-md-offset-2' id='search'>
+	<div class='navbar navbar-inverse navbar-fixed-top'>
+	<div class='col-md-8 col-md-offset-2'>
+  
+    <h1 class='navbar-header'>DPLA THUMBS</h1>
 
-    <h1>DPLA THUMBS</h1>
 		<form id='search'>
 			<input type="text">
 			<input type="submit" value='get thumbs!'>
 		</form>
+  
 	</div>
 	</div>
 
 	<div class='row'>
+    
+    <div class='col-md-8 col-md-offset-2' id='thumbs'>
+      <ul class='list-inline'></ul>
+    </div>
 		
 	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
