@@ -46,7 +46,7 @@ var dplaThumbs = {
 		$.ajax({
 
 	        type: 'GET',
-	        url: url,
+	        url: baseURL,
 	        data: data,
 	        // don't forget! otherwise won't work
 	        dataType: 'jsonp',
