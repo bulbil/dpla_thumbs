@@ -1,12 +1,22 @@
-// test dpla thing
-// should take a simple search and return thumbs
+// 				<コ:彡
+//
+//			dpla-thumbs
+// 
+//
+// nabil kashyap (www.nabilk.com)
+// this is a simple script to show off the basics of the DPLA
+// API -- not particularly robust but I hope gives the basic idea
 
+// first get your api key from http://dp.la/info/developers/codex/policies/#get-a-key
 var apiKey = '2620eebbca447b21a05739e663e5d788',
 baseURL = 'http://api.dp.la/v2/items?q=',
+// pagination does not start on 0 but on an index of 1
 page = 1;
 
+// bootstrap tooltip instantiation
 $('.tooltip').tooltip();
 
+// search button event
 $('#search').submit(function(e) {
 
 	e.preventDefault();
@@ -16,44 +26,48 @@ $('#search').submit(function(e) {
 
 	var input = $('#search input[type=text]').val();
 
-	dpla.search(input, page);
+	dplaThumbs.search(input, page);
 
 });
 
-var dpla = {
+var dplaThumbs = {
 
 	search: function(str, int){
 		
+	// the main object to store your GET parameters ... 
+	// the possibilities are (almost) endless
 		data = { 	
 			'q': str, 
     		'api_key': apiKey,
     		'page_size': 10,
     		'page': int
 	        	};
-
-		var url = baseURL
-			+ str;
-
+	// the basic ajax request
 		$.ajax({
 
 	        type: 'GET',
 	        url: url,
 	        data: data,
+	        // don't forget! otherwise won't work
 	        dataType: 'jsonp',
 	        success: function(data) {
 
+	        	// each request has some overall metadata, like data.count
 				var count = (data.count > 0) ? data.count + ' results' : 'no results';
 				$('#count h1').text(count);
 
-
+				// each record is returned in data.docs
 	        	$.each(data.docs, function(i,d) {
 	
 					$('#results h3').css('display', function() { return ($('#thumbs ul li').length == 0) ? 'visible' : 'none'; });
 
+					// d.object, for instance, has the URL to the thumb (low-res preview of the digital object)
+					// for the purpose of this thing, skips a result if no thumbnail
 	        		if(d.object) {
 						$('#thumbs ul').append('<li>');
 						var thumb = $('#thumbs li').last();
 						thumb.append('<a><img>');
+						// d.isShownAt has the URL to the original representation of the record
 						thumb.children('a').attr( {'href': d.isShownAt, 'target': 'blank'});		
 						thumb.find('a img').attr('src', d.object);
 						thumb.tooltip({'title': d.sourceResource.title, 'placement': 'auto bottom'});
