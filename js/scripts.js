@@ -8,7 +8,7 @@
 // API -- not particularly robust but I hope gives the basic idea
 
 // first get your api key from http://dp.la/info/developers/codex/policies/#get-a-key
-var apiKey = '2620eebbca447b21a05739e663e5d788',
+var apiKey = '[YOUR_API_KEY]',
 baseURL = 'http://api.dp.la/v2/items?q=',
 // pagination does not start on 0 but on an index of 1
 page = 1;
